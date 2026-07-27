@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valixon · The AI Operating System for Dental Clinics</title>
+<meta name="description" content="Valixon is the AI operating system for dental clinics. Track inventory, recover inactive patients, get a weekly action plan, and stay accreditation-ready. In Thai and English. 45 days free." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E2A47'/%3E%3Cpath d='M20 18h7l5 16 5-16h7L34 46h-4z' fill='%2314B8A6'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#0E2A47;
+    --navy-2:#0A2038;
+    --teal:#14B8A6;
+    --teal-dark:#0E9384;
+    --mint:#E6FBF7;
+    --bg:#F6F9FB;
+    --ink:#0E2A47;
+    --muted:#5A6B7B;
+    --line:#E4EBF1;
+    --white:#ffffff;
+    --radius:18px;
+    --shadow:0 18px 45px -20px rgba(14,42,71,.35);
+    --shadow-sm:0 8px 24px -12px rgba(14,42,71,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.th{font-family:'Noto Sans Thai','Inter',sans-serif;line-height:1.8;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  section{scroll-margin-top:90px;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  .hl{color:var(--teal);}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,249,251,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1140px;margin:0 auto;gap:18px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px;color:var(--navy);}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:20px;height:20px;}
+  .nav-links{display:flex;gap:28px;align-items:center;}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--muted);transition:color .15s;}
+  .nav-links a:hover{color:var(--navy);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--white);}
+  .lang-btn{border:none;background:none;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;transition:.15s;}
+  .lang-btn.active{background:var(--navy);color:#fff;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;
+    padding:13px 24px;border-radius:999px;border:none;transition:transform .12s,box-shadow .15s;
+  }
+  .btn-primary{background:var(--teal);color:#fff;box-shadow:0 10px 24px -10px rgba(20,184,166,.8);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(20,184,166,.9);}
+  .btn-nav{padding:10px 20px;font-size:14px;}
+  .btn-light{background:#fff;color:var(--navy);border:1px solid var(--line);}
+  .btn-light:hover{transform:translateY(-2px);}
+
+  /* HERO */
+  .hero{
+    background:radial-gradient(1100px 520px at 80% -5%,rgba(20,184,166,.22),transparent),
+               linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;padding:74px 0 96px;position:relative;overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(20,184,166,.16);border:1px solid rgba(20,184,166,.4);
+    color:#7FE9DA;font-size:13px;font-weight:600;padding:7px 15px;border-radius:999px;margin-bottom:22px;
+  }
+  .hero h1{font-size:52px;line-height:1.1;font-weight:900;letter-spacing:-1.5px;margin-bottom:20px;}
+  body.th .hero h1{font-size:44px;line-height:1.35;letter-spacing:0;}
+  .hero p.sub{font-size:18px;color:#C4D2E0;max-width:520px;margin-bottom:30px;}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .hero-note{margin-top:18px;font-size:13.5px;color:#8FA4B8;display:flex;align-items:center;gap:8px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block;}
+
+  /* DASHBOARD MOCK */
+  .dashboard-card{
+    background:#fff;border-radius:22px;padding:22px;box-shadow:0 40px 80px -30px rgba(0,0,0,.55);
+    position:relative;color:var(--ink);
+  }
+  .db-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:2px 4px 16px;border-bottom:1px solid var(--line);margin-bottom:14px;
+  }
+  .db-title{font-weight:800;font-size:17px;color:var(--navy);}
+  .db-date{font-size:12px;color:var(--muted);font-weight:600;margin-top:3px;}
+  .db-avatar{
+    width:40px;height:40px;border-radius:11px;background:var(--navy);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .db-avatar svg{width:20px;height:20px;}
+  .db-body{display:flex;flex-direction:column;padding:0 2px;}
+  .db-item{display:flex;gap:13px;align-items:flex-start;padding:13px 0;}
+  .db-item + .db-item{border-top:1px solid var(--line);}
+  .db-num{
+    width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--teal-dark);
+    font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .db-text{flex:1;min-width:0;}
+  .db-action{font-weight:600;font-size:14px;line-height:1.4;color:var(--navy);}
+  .db-impact{font-size:12.5px;color:var(--teal-dark);font-weight:600;margin-top:3px;}
+  .float-badge{
+    position:absolute;right:-14px;bottom:26px;background:#fff;border-radius:14px;
+    padding:11px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:9px;
+    font-size:13px;font-weight:700;color:var(--navy);
+  }
+  .float-badge .ring{width:30px;height:30px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;color:var(--teal-dark);font-weight:800;font-size:14px;}
+
+  /* SECTIONS */
+  .section{padding:88px 0;}
+  .kicker{text-transform:uppercase;letter-spacing:2px;font-size:12.5px;font-weight:700;color:var(--teal-dark);margin-bottom:12px;}
+  body.th .kicker{letter-spacing:1px;}
+  .section h2{font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:14px;}
+  body.th .section h2{font-size:32px;letter-spacing:0;line-height:1.4;}
+  .section .lead{font-size:17px;color:var(--muted);max-width:600px;}
+  .head-center{text-align:center;}
+  .head-center .lead{margin:0 auto;}
+
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px;}
+  .feature{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;
+    transition:transform .15s,box-shadow .15s;position:relative;
+  }
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm);}
+  .feature .icon{width:50px;height:50px;border-radius:13px;background:var(--mint);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feature .icon svg{width:25px;height:25px;stroke:var(--teal-dark);}
+  .feature .tag{
+    position:absolute;top:22px;right:22px;
+    font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--teal-dark);background:var(--mint);padding:3px 9px;border-radius:6px;
+  }
+  .feature h3{font-size:20px;font-weight:800;margin-bottom:8px;padding-right:70px;}
+  .feature p{font-size:15px;color:var(--muted);line-height:1.6;}
+
+  /* steps */
+  .steps-sec{background:var(--navy);color:#fff;}
+  .steps-sec .lead{color:#A9BCD0;}
+  .steps-sec .kicker{color:#7FE9DA;}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+  .step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:30px;}
+  .step .num{
+    width:42px;height:42px;border-radius:12px;background:var(--teal);color:#fff;
+    font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .step h3{font-size:18px;font-weight:700;margin-bottom:7px;}
+  .step p{font-size:14.5px;color:#A9BCD0;}
+
+  /* offer + form */
+  .offer-sec{
+    background:radial-gradient(900px 420px at 15% 0%,rgba(20,184,166,.18),transparent),
+               linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;
+  }
+  .offer-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;}
+  .offer-badge{
+    display:inline-flex;align-items:center;gap:8px;background:rgba(20,184,166,.16);
+    border:1px solid rgba(20,184,166,.4);color:#7FE9DA;font-size:13px;font-weight:700;
+    padding:7px 15px;border-radius:999px;margin-bottom:18px;
+  }
+  .offer-grid h2{font-size:40px;font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:14px;color:#fff;}
+  body.th .offer-grid h2{font-size:33px;letter-spacing:0;line-height:1.4;}
+  .offer-grid .osub{font-size:16.5px;color:#C4D2E0;margin-bottom:26px;}
+  .perks{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .perks li{display:flex;align-items:center;gap:12px;font-size:15.5px;font-weight:500;}
+  .check{
+    width:24px;height:24px;border-radius:50%;background:var(--teal);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .check svg{width:13px;height:13px;}
+
+  .form-card{background:#fff;border-radius:22px;padding:34px;box-shadow:0 40px 90px -35px rgba(0,0,0,.6);color:var(--ink);}
+  .form-card h3{font-size:22px;font-weight:800;margin-bottom:6px;}
+  .form-card .fsub{font-size:14.5px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
+  .form-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--line);}
+  .form-section:last-of-type{border-bottom:none;padding-bottom:6px;}
+  .section-label{
+    font-size:12px;font-weight:700;color:var(--teal-dark);text-transform:uppercase;
+    letter-spacing:1.2px;margin-bottom:14px;
+  }
+  body.th .section-label{letter-spacing:.5px;font-size:13px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .field{margin-bottom:13px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy);}
+  .field input,.field textarea,.field select{
+    width:100%;font-family:inherit;font-size:14.5px;color:var(--ink);
+    padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);transition:.15s;
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(20,184,166,.13);}
+
+  .checkbox-grid{display:flex;flex-direction:column;gap:8px;}
+  .check-item{
+    display:flex;align-items:flex-start;gap:11px;
+    padding:11px 14px;border:1px solid var(--line);border-radius:11px;
+    background:var(--bg);cursor:pointer;transition:.15s;font-size:14px;line-height:1.5;
+  }
+  .check-item:hover{border-color:var(--teal);background:#fff;}
+  .check-item input[type="checkbox"]{
+    accent-color:var(--teal);width:17px;height:17px;margin-top:1px;flex-shrink:0;cursor:pointer;
+  }
+  .radio-row{display:flex;gap:22px;margin-top:2px;}
+  .radio-row label{display:flex;align-items:center;gap:7px;font-size:14.5px;cursor:pointer;font-weight:500;color:var(--navy);}
+  .radio-row input{accent-color:var(--teal);cursor:pointer;width:16px;height:16px;}
+
+  .form-card .btn-primary{width:100%;margin-top:10px;padding:15px 24px;font-size:15.5px;}
+  .form-privacy{font-size:12px;color:var(--muted);text-align:center;margin-top:13px;line-height:1.5;}
+  .form-success{display:none;text-align:center;padding:40px 14px;}
+  .form-success .big{
+    width:66px;height:66px;border-radius:50%;background:var(--mint);color:var(--teal-dark);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  }
+  .form-success .big svg{width:32px;height:32px;}
+  .form-success h3{font-size:22px;margin-bottom:10px;}
+  .form-success p{font-size:14.5px;color:var(--muted);line-height:1.6;}
+
+  /* about */
+  .about-card{
+    background:#fff;border:1px solid var(--line);border-radius:24px;padding:48px;
+    display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;box-shadow:var(--shadow-sm);
+  }
+  .about-photo{
+    width:130px;height:130px;border-radius:24px;flex-shrink:0;
+    background:linear-gradient(160deg,var(--teal),var(--navy));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:44px;font-weight:800;
+  }
+  .about-card .quote{font-size:21px;font-weight:600;line-height:1.5;letter-spacing:-.3px;margin-bottom:18px;}
+  body.th .about-card .quote{font-size:19px;line-height:1.7;letter-spacing:0;}
+  .about-author{font-weight:800;font-size:16px;}
+  .about-role{font-size:14px;color:var(--teal-dark);font-weight:600;}
+
+  /* footer */
+  footer{background:var(--navy-2);color:#C4D2E0;padding:60px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:38px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;margin-bottom:14px;}
+  .foot-about{font-size:14.5px;max-width:320px;color:#94A8BC;line-height:1.6;}
+  .foot-col h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;}
+  .foot-col a{display:block;font-size:14.5px;margin-bottom:9px;color:#94A8BC;transition:color .15s;}
+  .foot-col a:hover{color:#fff;}
+  .socials{display:flex;gap:11px;margin-top:16px;}
+  .socials a{
+    width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);
+    display:flex;align-items:center;justify-content:center;transition:.15s;
+  }
+  .socials a:hover{background:var(--teal);transform:translateY(-2px);}
+  .socials svg{width:18px;height:18px;fill:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:#7187A0;flex-wrap:wrap;gap:10px;}
+
+  /* responsive */
+  @media(max-width:900px){
+    .hero-grid,.offer-grid{grid-template-columns:1fr;gap:40px;}
+    .feature-grid,.steps{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:38px;}
+    body.th .hero h1{font-size:32px;}
+    .section h2,.offer-grid h2{font-size:28px;}
+    .about-card{grid-template-columns:1fr;text-align:center;padding:34px 24px;}
+    .about-photo{margin:0 auto;}
+    .foot-grid{grid-template-columns:1fr;gap:30px;}
+    .form-row{grid-template-columns:1fr;}
+    .section{padding:64px 0;}
+    .form-card{padding:26px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 64 64"><path d="M14 14h12l6 24 6-24h12L38 50h-12z" fill="#14B8A6"/></svg>
+      </span>
+      Valixon
+    </a>
+    <div class="nav-links">
+      <a href="#modules" data-i18n="nav.modules">Product</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#offer" data-i18n="nav.offer">Free Trial</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="th">ไทย</button>
+      </div>
+      <a href="#offer" class="btn btn-primary btn-nav" data-i18n="nav.cta">Get 45 Days Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill" data-i18n="hero.badge">✦ The AI operating system for dental clinics</span>
+      <h1 data-i18n="hero.title">Run a smarter dental practice, in <span class="hl">half the time</span>.</h1>
+      <p class="sub" data-i18n="hero.sub">Valixon manages your inventory, brings back inactive patients, tells you what to focus on each week, and keeps your clinic accreditation-ready. All in one place. In Thai and English.</p>
+      <div class="hero-cta">
+        <a href="#offer" class="btn btn-primary" data-i18n="hero.cta">Get your free Clinic Assessment</a>
+        <a href="#modules" class="btn btn-light" data-i18n="hero.cta2">See what's inside</a>
+      </div>
+      <p class="hero-note"><span class="dot"></span><span data-i18n="hero.note">45 days free · No credit card · Bilingual TH and EN</span></p>
+    </div>
+
+    <!-- Owner Action Dashboard mock, showing the flagship module -->
+    <div class="dashboard-card">
+      <div class="db-head">
+        <div>
+          <div class="db-title" data-i18n="db.title">Your Monday Brief</div>
+          <div class="db-date" data-i18n="db.date">Auto-generated · 9:00 AM every Monday</div>
+        </div>
+        <div class="db-avatar">
+          <svg viewBox="0 0 64 64"><path d="M14 14h12l6 24 6-24h12L38 50h-12z" fill="#14B8A6"/></svg>
+        </div>
+      </div>
+      <div class="db-body">
+        <div class="db-item">
+          <div class="db-num">1</div>
+          <div class="db-text">
+            <div class="db-action" data-i18n="db.i1a">Contact 25 patients due for a cleaning recall</div>
+            <div class="db-impact" data-i18n="db.i1b">Estimated recovery: ฿37,500</div>
+          </div>
+        </div>
+        <div class="db-item">
+          <div class="db-num">2</div>
+          <div class="db-text">
+            <div class="db-action" data-i18n="db.i2a">Approve 3 inventory orders. Delay the bulk composite order.</div>
+            <div class="db-impact" data-i18n="db.i2b">14 weeks of stock still on hand</div>
+          </div>
+        </div>
+        <div class="db-item">
+          <div class="db-num">3</div>
+          <div class="db-text">
+            <div class="db-action" data-i18n="db.i3a">3 quality checklists overdue in Branch 2</div>
+            <div class="db-impact" data-i18n="db.i3b">Assign to Head Assistant</div>
+          </div>
+        </div>
+      </div>
+      <div class="float-badge">
+        <span class="ring">45</span>
+        <span data-i18n="db.badge">days free</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PRODUCT V1 MODULES -->
+<section class="section" id="modules">
+  <div class="wrap">
+    <div class="head-center">
+      <div class="kicker" data-i18n="mods.kicker">Product v1 · Dental Clinic Profit &amp; Control System</div>
+      <h2 data-i18n="mods.title">Four AI modules. One dental practice, running smoothly.</h2>
+      <p class="lead" data-i18n="mods.sub">Valixon covers the four areas where clinics lose the most time and money. Each module works on its own, and they get smarter together.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="tag" data-i18n="mods.tag1">Module 1</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3 data-i18n="f1.title">Inventory Agent</h3>
+        <p data-i18n="f1.text">Never run out of essentials. Never let stock expire. Valixon tracks every product, forecasts when to reorder, and catches the best supplier promotions.</p>
+      </div>
+      <div class="feature">
+        <span class="tag" data-i18n="mods.tag2">Module 2</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 data-i18n="f2.title">Recall Agent</h3>
+        <p data-i18n="f2.text">Automatic follow-up for cleaning recalls, incomplete treatments, and inactive patients. Fewer no-shows, more revenue you already earned.</p>
+      </div>
+      <div class="feature">
+        <span class="tag" data-i18n="mods.tag3">Module 3</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="3" y1="20" x2="21" y2="20"/>
+          </svg>
+        </div>
+        <h3 data-i18n="f3.title">Owner Dashboard</h3>
+        <p data-i18n="f3.text">Every Monday, Valixon tells you the top 5 actions that will actually move revenue this week. No spreadsheets. No guessing. Clear next steps.</p>
+      </div>
+      <div class="feature">
+        <span class="tag" data-i18n="mods.tag4">Module 4</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <h3 data-i18n="f4.title">Quality &amp; Compliance</h3>
+        <p data-i18n="f4.text">Sterilization logs, consent tracking, incident reports, and training records. Organized, up-to-date, and ready for inspection any day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps-sec" id="how">
+  <div class="wrap">
+    <div class="head-center">
+      <div class="kicker" data-i18n="steps.kicker">How it works</div>
+      <h2 data-i18n="steps.title">Up and running in three steps</h2>
+      <p class="lead" data-i18n="steps.sub">No new software for your team to learn. Valixon fits the way your clinic already works.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3 data-i18n="s1.title">Free Clinic Assessment</h3>
+        <p data-i18n="s1.text">You share a few details about your clinic. We identify where you are losing time and money.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3 data-i18n="s2.title">Guided 45-day setup</h3>
+        <p data-i18n="s2.text">Our team configures Valixon for your clinic, trains your staff, and sets a clear baseline to measure results.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3 data-i18n="s3.title">Measurable results in 90 days</h3>
+        <p data-i18n="s3.text">Recovered revenue, reduced waste, and a clearer weekly plan for the owner. Then decide if you want to continue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER + CLINIC ASSESSMENT FORM -->
+<section class="section offer-sec" id="offer">
+  <div class="wrap offer-grid">
+    <div>
+      <span class="offer-badge" data-i18n="offer.badge">★ Founding pilot program</span>
+      <h2 data-i18n="offer.title">Try Valixon free for <span class="hl">45 days</span></h2>
+      <p class="osub" data-i18n="offer.sub">We are hand-picking a small group of dental clinics to be our founding pilot partners. Fill out the free Clinic Assessment. If your clinic is a fit, we will set you up with the full 4-module system, at no cost, for 45 days.</p>
+      <ul class="perks">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="offer.perk1">Full access to all 4 modules</span></li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="offer.perk2">Personal onboarding and weekly support</span></li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="offer.perk3">Clear ROI report at day 90</span></li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="offer.perk4">No credit card required</span></li>
+      </ul>
+    </div>
+
+    <!-- TRISHA: this is a native form. When your Thai + English Google Form URLs are ready,
+         replace this <form> block with an <iframe> and switch its src via setLang() in the JS. -->
+    <div class="form-card">
+      <form id="assessmentForm" onsubmit="return submitForm(event)">
+        <h3 data-i18n="form.title">Free Clinic Assessment</h3>
+        <p class="fsub" data-i18n="form.subtitle">Takes 3 minutes. We reply within one business day with your personalized assessment and next steps.</p>
+
+        <div class="form-section">
+          <div class="section-label" data-i18n="form.s1">1. About your clinic</div>
+          <div class="form-row">
+            <div class="field">
+              <label data-i18n="form.clinicName">Clinic name</label>
+              <input type="text" required data-i18n-ph="form.clinicName.ph" placeholder="Bright Smile Dental" />
+            </div>
+            <div class="field">
+              <label data-i18n="form.location">City / Country</label>
+              <input type="text" required data-i18n-ph="form.location.ph" placeholder="Bangkok, Thailand" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label data-i18n="form.branches">Number of branches</label>
+              <input type="number" min="1" required placeholder="1" />
+            </div>
+            <div class="field">
+              <label data-i18n="form.dentists">Number of dentists</label>
+              <input type="number" min="1" required placeholder="3" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label data-i18n="form.owner">Owner name</label>
+              <input type="text" required data-i18n-ph="form.owner.ph" placeholder="Dr. Kanya Rojanapradit" />
+            </div>
+            <div class="field">
+              <label data-i18n="form.role">Your role</label>
+              <input type="text" data-i18n-ph="form.role.ph" placeholder="Owner, Manager, Dentist..." />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-label" data-i18n="form.s2">2. Which challenges apply to your clinic?</div>
+          <div class="checkbox-grid">
+            <label class="check-item"><input type="checkbox" name="ch" value="calls" /><span data-i18n="form.ch1">Missed patient calls or after-hours bookings</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="noshow" /><span data-i18n="form.ch2">No-shows and last-minute cancellations</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="inventory" /><span data-i18n="form.ch3">Inventory waste, stockouts, or expired products</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="profit" /><span data-i18n="form.ch4">Hard to see which treatments make money</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="staff" /><span data-i18n="form.ch5">Difficulty hiring or keeping dental assistants</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="quality" /><span data-i18n="form.ch6">Accreditation or quality documentation stress</span></label>
+            <label class="check-item"><input type="checkbox" name="ch" value="branches" /><span data-i18n="form.ch7">Multiple branches are hard to coordinate</span></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-label" data-i18n="form.s3">3. Your current tools</div>
+          <div class="field">
+            <label data-i18n="form.software">Which clinic management software do you use? (Optional)</label>
+            <input type="text" data-i18n-ph="form.software.ph" placeholder="DentCloud, FD, spreadsheets, LINE..." />
+          </div>
+          <div class="field">
+            <label data-i18n="form.useLine">Do you communicate with patients via LINE?</label>
+            <div class="radio-row">
+              <label><input type="radio" name="line" value="yes" /><span data-i18n="form.yes">Yes</span></label>
+              <label><input type="radio" name="line" value="no" /><span data-i18n="form.no">No</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-label" data-i18n="form.s4">4. How can we reach you?</div>
+          <div class="form-row">
+            <div class="field">
+              <label data-i18n="form.name">Your name</label>
+              <input type="text" required data-i18n-ph="form.name.ph" placeholder="Dr. Jane Smith" />
+            </div>
+            <div class="field">
+              <label data-i18n="form.email">Email</label>
+              <input type="email" required placeholder="you@practice.com" />
+            </div>
+          </div>
+          <div class="field">
+            <label data-i18n="form.phone">Phone (include country code)</label>
+            <input type="tel" required placeholder="+66 8x xxx xxxx" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" data-i18n="form.submit">Send my Clinic Assessment</button>
+        <p class="form-privacy" data-i18n="form.privacy">Your details are used only to prepare your assessment and free trial. No spam.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3 data-i18n="form.success.title">Assessment received</h3>
+        <p data-i18n="form.success.text">Thank you. Our team will review your responses and reach out within one business day to schedule a short call and confirm your 45-day free trial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-card">
+      <!-- TRISHA: swap the "K" with Dr. Kook's real photo when you have one.
+           Replace the letter, or change .about-photo CSS to background-image if using a photo. -->
+      <div class="about-photo">K</div>
+      <div>
+        <div class="kicker" data-i18n="about.kicker">Built with dentists, for dentists</div>
+        <p class="quote" data-i18n="about.quote">"Dentists shouldn't lose patients to a missed call, or hours to a spreadsheet. We built Valixon so every clinic can deliver world-class care, without burning out the team."</p>
+        <!-- TRISHA: replace "Dr. Kook" with the real full name and formal title -->
+        <div class="about-author" data-i18n="about.author">Dr. Kook</div>
+        <div class="about-role" data-i18n="about.role">Co-Founder, Valixon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <span class="logo-mark"><svg viewBox="0 0 64 64"><path d="M14 14h12l6 24 6-24h12L38 50h-12z" fill="#14B8A6"/></svg></span>
+          Valixon
+        </div>
+        <p class="foot-about" data-i18n="footer.about">The AI operating system for dental clinics. Built bilingual for Thailand and beyond.</p>
+        <!-- TRISHA: replace each "#" href with your real social URLs. Delete the ones you do not have. -->
+        <div class="socials">
+          <a href="#" aria-label="LINE"><svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63h-1.755v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63h-1.755v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0m0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324M12 16a4 4 0 110-8 4 4 0 010 8m6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footer.linksTitle">Explore</h4>
+        <a href="#modules" data-i18n="nav.modules">Product</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#offer" data-i18n="nav.offer">Free Trial</a>
+        <a href="#about" data-i18n="footer.about.link">About</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footer.contactTitle">Get in touch</h4>
+        <!-- TRISHA: swap once your Cloudflare Email Routing is live for hello@valixon.com -->
+        <a href="mailto:hello@valixon.com">hello@valixon.com</a>
+        <a href="#" data-i18n="footer.line">LINE: @valixon</a>
+        <a href="#offer" data-i18n="nav.cta">Get 45 Days Free</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer.rights">© 2026 Valixon. All rights reserved.</span>
+      <span data-i18n="footer.made">คืนหมอให้คนไข้ · Return dentists to their patients.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    "nav.modules":"Product",
+    "nav.how":"How it works",
+    "nav.offer":"Free Trial",
+    "nav.contact":"Contact",
+    "nav.cta":"Get 45 Days Free",
+
+    "hero.badge":"✦ The AI operating system for dental clinics",
+    "hero.title":"Run a smarter dental practice, in <span class='hl'>half the time</span>.",
+    "hero.sub":"Valixon manages your inventory, brings back inactive patients, tells you what to focus on each week, and keeps your clinic accreditation-ready. All in one place. In Thai and English.",
+    "hero.cta":"Get your free Clinic Assessment",
+    "hero.cta2":"See what's inside",
+    "hero.note":"45 days free · No credit card · Bilingual TH and EN",
+
+    "db.title":"Your Monday Brief",
+    "db.date":"Auto-generated · 9:00 AM every Monday",
+    "db.i1a":"Contact 25 patients due for a cleaning recall",
+    "db.i1b":"Estimated recovery: ฿37,500",
+    "db.i2a":"Approve 3 inventory orders. Delay the bulk composite order.",
+    "db.i2b":"14 weeks of stock still on hand",
+    "db.i3a":"3 quality checklists overdue in Branch 2",
+    "db.i3b":"Assign to Head Assistant",
+    "db.badge":"days free",
+
+    "mods.kicker":"Product v1 · Dental Clinic Profit & Control System",
+    "mods.title":"Four AI modules. One dental practice, running smoothly.",
+    "mods.sub":"Valixon covers the four areas where clinics lose the most time and money. Each module works on its own, and they get smarter together.",
+    "mods.tag1":"Module 1",
+    "mods.tag2":"Module 2",
+    "mods.tag3":"Module 3",
+    "mods.tag4":"Module 4",
+
+    "f1.title":"Inventory Agent",
+    "f1.text":"Never run out of essentials. Never let stock expire. Valixon tracks every product, forecasts when to reorder, and catches the best supplier promotions.",
+    "f2.title":"Recall Agent",
+    "f2.text":"Automatic follow-up for cleaning recalls, incomplete treatments, and inactive patients. Fewer no-shows, more revenue you already earned.",
+    "f3.title":"Owner Dashboard",
+    "f3.text":"Every Monday, Valixon tells you the top 5 actions that will actually move revenue this week. No spreadsheets. No guessing. Clear next steps.",
+    "f4.title":"Quality & Compliance",
+    "f4.text":"Sterilization logs, consent tracking, incident reports, and training records. Organized, up-to-date, and ready for inspection any day.",
+
+    "steps.kicker":"How it works",
+    "steps.title":"Up and running in three steps",
+    "steps.sub":"No new software for your team to learn. Valixon fits the way your clinic already works.",
+    "s1.title":"Free Clinic Assessment",
+    "s1.text":"You share a few details about your clinic. We identify where you are losing time and money.",
+    "s2.title":"Guided 45-day setup",
+    "s2.text":"Our team configures Valixon for your clinic, trains your staff, and sets a clear baseline to measure results.",
+    "s3.title":"Measurable results in 90 days",
+    "s3.text":"Recovered revenue, reduced waste, and a clearer weekly plan for the owner. Then decide if you want to continue.",
+
+    "offer.badge":"★ Founding pilot program",
+    "offer.title":"Try Valixon free for <span class='hl'>45 days</span>",
+    "offer.sub":"We are hand-picking a small group of dental clinics to be our founding pilot partners. Fill out the free Clinic Assessment. If your clinic is a fit, we will set you up with the full 4-module system, at no cost, for 45 days.",
+    "offer.perk1":"Full access to all 4 modules",
+    "offer.perk2":"Personal onboarding and weekly support",
+    "offer.perk3":"Clear ROI report at day 90",
+    "offer.perk4":"No credit card required",
+
+    "form.title":"Free Clinic Assessment",
+    "form.subtitle":"Takes 3 minutes. We reply within one business day with your personalized assessment and next steps.",
+    "form.s1":"1. About your clinic",
+    "form.clinicName":"Clinic name",
+    "form.clinicName.ph":"Bright Smile Dental",
+    "form.location":"City / Country",
+    "form.location.ph":"Bangkok, Thailand",
+    "form.branches":"Number of branches",
+    "form.dentists":"Number of dentists",
+    "form.owner":"Owner name",
+    "form.owner.ph":"Dr. Kanya Rojanapradit",
+    "form.role":"Your role",
+    "form.role.ph":"Owner, Manager, Dentist...",
+    "form.s2":"2. Which challenges apply to your clinic?",
+    "form.ch1":"Missed patient calls or after-hours bookings",
+    "form.ch2":"No-shows and last-minute cancellations",
+    "form.ch3":"Inventory waste, stockouts, or expired products",
+    "form.ch4":"Hard to see which treatments make money",
+    "form.ch5":"Difficulty hiring or keeping dental assistants",
+    "form.ch6":"Accreditation or quality documentation stress",
+    "form.ch7":"Multiple branches are hard to coordinate",
+    "form.s3":"3. Your current tools",
+    "form.software":"Which clinic management software do you use? (Optional)",
+    "form.software.ph":"DentCloud, FD, spreadsheets, LINE...",
+    "form.useLine":"Do you communicate with patients via LINE?",
+    "form.yes":"Yes",
+    "form.no":"No",
+    "form.s4":"4. How can we reach you?",
+    "form.name":"Your name",
+    "form.name.ph":"Dr. Jane Smith",
+    "form.email":"Email",
+    "form.phone":"Phone (include country code)",
+    "form.submit":"Send my Clinic Assessment",
+    "form.privacy":"Your details are used only to prepare your assessment and free trial. No spam.",
+    "form.success.title":"Assessment received",
+    "form.success.text":"Thank you. Our team will review your responses and reach out within one business day to schedule a short call and confirm your 45-day free trial.",
+
+    "about.kicker":"Built with dentists, for dentists",
+    "about.quote":"\"Dentists shouldn't lose patients to a missed call, or hours to a spreadsheet. We built Valixon so every clinic can deliver world-class care, without burning out the team.\"",
+    "about.author":"Dr. Kook",
+    "about.role":"Co-Founder, Valixon",
+
+    "footer.about":"The AI operating system for dental clinics. Built bilingual for Thailand and beyond.",
+    "footer.linksTitle":"Explore",
+    "footer.about.link":"About",
+    "footer.contactTitle":"Get in touch",
+    "footer.line":"LINE: @valixon",
+    "footer.rights":"© 2026 Valixon. All rights reserved.",
+    "footer.made":"คืนหมอให้คนไข้ · Return dentists to their patients."
+  },
+  th: {
+    "nav.modules":"ผลิตภัณฑ์",
+    "nav.how":"วิธีการทำงาน",
+    "nav.offer":"ทดลองใช้ฟรี",
+    "nav.contact":"ติดต่อเรา",
+    "nav.cta":"รับฟรี 45 วัน",
+
+    "hero.badge":"✦ ระบบปฏิบัติการ AI สำหรับคลินิกทันตกรรม",
+    "hero.title":"บริหารคลินิกทันตกรรมให้ฉลาดขึ้น ใน<span class='hl'>ครึ่งเวลา</span>",
+    "hero.sub":"Valixon จัดการสต็อกให้คุณ พาคนไข้ที่หายไปกลับมา บอกคุณว่าต้องโฟกัสอะไรในแต่ละสัปดาห์ และดูแลให้คลินิกพร้อมรับการตรวจสอบเสมอ ทั้งหมดในที่เดียว ทั้งภาษาไทยและอังกฤษ",
+    "hero.cta":"รับการประเมินคลินิกฟรี",
+    "hero.cta2":"ดูว่ามีอะไรบ้าง",
+    "hero.note":"ฟรี 45 วัน · ไม่ต้องใช้บัตรเครดิต · รองรับทั้งไทยและอังกฤษ",
+
+    "db.title":"สรุปเช้าวันจันทร์",
+    "db.date":"สร้างอัตโนมัติ · 9:00 น. ทุกวันจันทร์",
+    "db.i1a":"ติดต่อคนไข้ 25 คนที่ถึงกำหนดขูดหินปูน",
+    "db.i1b":"คาดว่าจะได้รายได้กลับมา ฿37,500",
+    "db.i2a":"อนุมัติคำสั่งซื้อ 3 รายการ ชะลอคำสั่งซื้อคอมโพสิตล็อตใหญ่ไว้ก่อน",
+    "db.i2b":"สต็อกยังมีใช้ได้อีก 14 สัปดาห์",
+    "db.i3a":"เช็คลิสต์คุณภาพเกินกำหนด 3 รายการที่สาขา 2",
+    "db.i3b":"มอบหมายให้หัวหน้าผู้ช่วย",
+    "db.badge":"วันฟรี",
+
+    "mods.kicker":"Product v1 · ระบบทำกำไรและควบคุมคลินิกทันตกรรม",
+    "mods.title":"4 โมดูล AI คลินิกทันตกรรมเดียวที่ดำเนินงานอย่างราบรื่น",
+    "mods.sub":"Valixon ครอบคลุม 4 ด้านที่คลินิกเสียเวลาและเงินมากที่สุด แต่ละโมดูลทำงานได้ด้วยตัวเอง และยิ่งเก่งขึ้นเมื่อใช้ร่วมกัน",
+    "mods.tag1":"โมดูล 1",
+    "mods.tag2":"โมดูล 2",
+    "mods.tag3":"โมดูล 3",
+    "mods.tag4":"โมดูล 4",
+
+    "f1.title":"Inventory Agent · จัดการสต็อก",
+    "f1.text":"ของไม่ขาด ของไม่หมดอายุ Valixon ติดตามทุกสินค้า พยากรณ์เวลาสั่งซื้อ และคว้าโปรโมชั่นที่ดีที่สุดจากซัพพลายเออร์ให้คุณ",
+    "f2.title":"Recall Agent · เรียกคนไข้กลับ",
+    "f2.text":"ติดตามคนไข้อัตโนมัติ ทั้งนัดขูดหินปูน การรักษาที่ยังไม่จบ และคนไข้ที่หายไป คนไข้ไม่มาตามนัดน้อยลง รายได้ที่ควรได้ก็กลับคืน",
+    "f3.title":"Owner Dashboard · แผนของเจ้าของ",
+    "f3.text":"ทุกวันจันทร์ Valixon บอกคุณ 5 อันดับสิ่งที่จะสร้างรายได้จริงในสัปดาห์นี้ ไม่ต้องใช้สเปรดชีท ไม่ต้องเดา แค่ทำตามที่ระบบบอก",
+    "f4.title":"Quality & Compliance · คุณภาพและการรับรอง",
+    "f4.text":"บันทึกการฆ่าเชื้อ ใบยินยอม รายงานอุบัติเหตุ และประวัติการอบรม เป็นระเบียบ อัพเดต และพร้อมสำหรับการตรวจสอบทุกวัน",
+
+    "steps.kicker":"วิธีการทำงาน",
+    "steps.title":"เริ่มใช้งานได้ใน 3 ขั้นตอน",
+    "steps.sub":"ทีมของคุณไม่ต้องเรียนรู้ซอฟต์แวร์ใหม่ Valixon เข้ากับวิธีการทำงานของคลินิกคุณที่มีอยู่แล้ว",
+    "s1.title":"ประเมินคลินิกฟรี",
+    "s1.text":"คุณแบ่งปันข้อมูลคลินิกของคุณสั้นๆ เราจะช่วยหาว่าคลินิกกำลังเสียเวลาและเงินตรงไหน",
+    "s2.title":"ตั้งค่าและใช้งาน 45 วัน",
+    "s2.text":"ทีมงานของเราตั้งค่า Valixon สำหรับคลินิกคุณ อบรมทีมของคุณ และวางเกณฑ์ที่ชัดเจนสำหรับวัดผล",
+    "s3.title":"เห็นผลจริงใน 90 วัน",
+    "s3.text":"รายได้ที่กลับคืน ของเสียที่ลดลง และแผนงานรายสัปดาห์ที่ชัดเจนสำหรับเจ้าของ แล้วค่อยตัดสินใจว่าจะไปต่อหรือไม่",
+
+    "offer.badge":"★ โครงการพันธมิตรผู้ก่อตั้ง",
+    "offer.title":"ทดลองใช้ Valixon ฟรี <span class='hl'>45 วัน</span>",
+    "offer.sub":"เรากำลังคัดเลือกคลินิกทันตกรรมกลุ่มเล็กๆ เพื่อร่วมเป็นพันธมิตรผู้ก่อตั้ง กรอกแบบประเมินคลินิกฟรี ถ้าคลินิกคุณเหมาะสม เราจะตั้งค่าระบบเต็มรูปแบบทั้ง 4 โมดูลให้คุณฟรี 45 วัน",
+    "offer.perk1":"ใช้งานได้ครบทั้ง 4 โมดูล",
+    "offer.perk2":"ช่วยตั้งค่าและดูแลรายสัปดาห์แบบส่วนตัว",
+    "offer.perk3":"รายงานผลตอบแทนชัดเจนในวันที่ 90",
+    "offer.perk4":"ไม่ต้องใช้บัตรเครดิต",
+
+    "form.title":"ประเมินคลินิกฟรี",
+    "form.subtitle":"ใช้เวลาแค่ 3 นาที เราจะตอบกลับภายใน 1 วันทำการพร้อมการประเมินและขั้นตอนถัดไปที่ปรับให้เหมาะกับคลินิกคุณ",
+    "form.s1":"1. เกี่ยวกับคลินิกของคุณ",
+    "form.clinicName":"ชื่อคลินิก",
+    "form.clinicName.ph":"คลินิกทันตกรรมยิ้มสดใส",
+    "form.location":"เมือง / ประเทศ",
+    "form.location.ph":"กรุงเทพฯ ประเทศไทย",
+    "form.branches":"จำนวนสาขา",
+    "form.dentists":"จำนวนทันตแพทย์",
+    "form.owner":"ชื่อเจ้าของคลินิก",
+    "form.owner.ph":"ทพญ. กัญญา โรจนประดิษฐ์",
+    "form.role":"ตำแหน่งของคุณ",
+    "form.role.ph":"เจ้าของ ผู้จัดการ ทันตแพทย์...",
+    "form.s2":"2. คลินิกของคุณเจอกับปัญหาข้อไหนบ้าง?",
+    "form.ch1":"รับสายคนไข้ไม่ทัน หรือมีการจองนอกเวลาทำการ",
+    "form.ch2":"คนไข้ไม่มาตามนัดหรือยกเลิกกะทันหัน",
+    "form.ch3":"สต็อกเสียหาย ของขาด หรือหมดอายุ",
+    "form.ch4":"ยากที่จะเห็นว่าการรักษาไหนทำเงินได้จริง",
+    "form.ch5":"หาและรักษาผู้ช่วยทันตแพทย์ได้ยาก",
+    "form.ch6":"เครียดกับการรับรองมาตรฐานและเอกสารคุณภาพ",
+    "form.ch7":"หลายสาขาประสานงานกันยาก",
+    "form.s3":"3. เครื่องมือที่คุณใช้อยู่ตอนนี้",
+    "form.software":"คุณใช้ซอฟต์แวร์บริหารคลินิกอะไร? (ไม่บังคับ)",
+    "form.software.ph":"DentCloud, FD, สเปรดชีท, LINE...",
+    "form.useLine":"คุณสื่อสารกับคนไข้ผ่าน LINE ไหม?",
+    "form.yes":"ใช่",
+    "form.no":"ไม่",
+    "form.s4":"4. เราจะติดต่อคุณได้อย่างไร?",
+    "form.name":"ชื่อของคุณ",
+    "form.name.ph":"ทพญ. สมหญิง ใจดี",
+    "form.email":"อีเมล",
+    "form.phone":"เบอร์โทรศัพท์ (พร้อมรหัสประเทศ)",
+    "form.submit":"ส่งการประเมินคลินิกของฉัน",
+    "form.privacy":"ข้อมูลของคุณจะถูกใช้เพื่อเตรียมการประเมินและการทดลองใช้ฟรีเท่านั้น ไม่มีสแปมแน่นอน",
+    "form.success.title":"ได้รับแบบประเมินแล้ว",
+    "form.success.text":"ขอบคุณค่ะ ทีมงานจะตรวจสอบคำตอบของคุณและติดต่อกลับภายใน 1 วันทำการ เพื่อนัดคุยสั้นๆ และยืนยันการทดลองใช้ฟรี 45 วัน",
+
+    "about.kicker":"สร้างโดยทันตแพทย์ เพื่อทันตแพทย์",
+    "about.quote":"\"ทันตแพทย์ไม่ควรเสียคนไข้เพราะสายที่รับไม่ทัน หรือเสียเวลาเป็นชั่วโมงไปกับสเปรดชีท เราสร้าง Valixon ขึ้นมาเพื่อให้ทุกคลินิกมอบการดูแลระดับโลกได้ โดยไม่ทำให้ทีมงานเหนื่อยล้า\"",
+    "about.author":"ดร. กุ๊ก",
+    "about.role":"ผู้ร่วมก่อตั้ง Valixon",
+
+    "footer.about":"ระบบปฏิบัติการ AI สำหรับคลินิกทันตกรรม ออกแบบให้รองรับทั้งไทยและทั่วโลก",
+    "footer.linksTitle":"สำรวจ",
+    "footer.about.link":"เกี่ยวกับเรา",
+    "footer.contactTitle":"ติดต่อเรา",
+    "footer.line":"LINE: @valixon",
+    "footer.rights":"© 2026 Valixon สงวนลิขสิทธิ์",
+    "footer.made":"คืนหมอให้คนไข้ · Return dentists to their patients."
+  }
+};
+
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.body.classList.toggle('th', lang === 'th');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(translations[lang][k] != null) el.innerHTML = translations[lang][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-ph');
+    if(translations[lang][k] != null) el.placeholder = translations[lang][k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  try{ localStorage.setItem('valixon_lang', lang); }catch(e){}
+}
+
+document.querySelectorAll('.lang-btn').forEach(function(b){
+  b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+});
+
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('assessmentForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  document.getElementById('offer').scrollIntoView({behavior:'smooth'});
+  return false;
+}
+
+(function(){
+  var saved = 'en';
+  try{ saved = localStorage.getItem('valixon_lang') || 'en'; }catch(e){}
+  setLang(saved);
+})();
+</script>
+</body>
+</html>
