@@ -262,6 +262,21 @@
   .socials svg{width:18px;height:18px;fill:#fff;}
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:#7187A0;flex-wrap:wrap;gap:10px;}
 
+  /* PRODUCT FAMILY */
+  .family-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;margin-top:48px;max-width:720px;margin-left:auto;margin-right:auto;}
+  .family-card{display:block;background:#fff;border:2px solid var(--line);border-radius:22px;padding:32px;transition:transform .15s,box-shadow .15s,border-color .15s;text-decoration:none;color:inherit;}
+  .family-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px -25px rgba(143,29,61,.45);border-color:var(--teal);}
+  .family-tag{display:inline-block;background:linear-gradient(135deg,#74162F,#A92B4C);color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;padding:4px 10px;border-radius:6px;margin-bottom:16px;}
+  .family-icon{width:54px;height:54px;border-radius:14px;background:var(--mint);color:var(--teal-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .family-icon svg{width:26px;height:26px;stroke:currentColor;}
+  .family-card h3{font-size:26px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.5px;}
+  .family-sub{font-size:12.5px;color:var(--teal-dark);font-weight:800;margin-bottom:14px;text-transform:uppercase;letter-spacing:1.5px;}
+  body.th .family-sub{letter-spacing:.5px;font-size:13px;}
+  .family-desc{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+  .family-cta{font-size:15px;font-weight:700;color:var(--teal);display:inline-flex;align-items:center;gap:6px;}
+  .family-cta::after{content:"→";transition:transform .15s;display:inline-block;}
+  .family-card:hover .family-cta::after{transform:translateX(4px);}
+
   /* responsive */
   @media(max-width:900px){
     .hero-grid,.offer-grid{grid-template-columns:1fr;gap:40px;}
@@ -425,6 +440,34 @@
   </div>
 </section>
 
+<!-- VALIXON PRODUCT FAMILY -->
+<section class="section" id="family" style="background:linear-gradient(180deg,#FBEBEF 0%,var(--bg) 100%);">
+  <div class="wrap">
+    <div class="head-center">
+      <div class="kicker" data-i18n="fam.kicker">Also from Valixon</div>
+      <h2 data-i18n="fam.title">Clinic OS is one product. Valixon is a family.</h2>
+      <p class="lead" data-i18n="fam.sub">We're building the AI operating layer for every part of a dental clinic. Clinic OS runs the front of the practice. Valixon HR runs your team.</p>
+    </div>
+    <div class="family-grid">
+      <a href="https://merge-works.github.io/valixon-hr/" target="_blank" rel="noopener" class="family-card">
+        <span class="family-tag" data-i18n="fam.tag">NEW · Live now</span>
+        <div class="family-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Valixon HR</h3>
+        <div class="family-sub" data-i18n="fam.hr.sub">The AI HR Operating System</div>
+        <p class="family-desc" data-i18n="fam.hr.desc">Monthly peer + CEO evaluations, weighted bonus reports, and team culture reviews. Includes an interactive Report Generator so you can decide bonuses in minutes.</p>
+        <div class="family-cta" data-i18n="fam.hr.cta">Explore Valixon HR</div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="section steps-sec" id="how">
   <div class="wrap">
@@ -578,9 +621,9 @@
       <div class="about-photo">K</div>
       <div>
         <div class="kicker" data-i18n="about.kicker">Built with dentists, for dentists</div>
-        <p class="quote" data-i18n="about.quote">"Dentists shouldn't lose patients to a missed call, or hours to a spreadsheet. We built Valixon so every clinic can deliver world-class care, without burning out the team."</p>
+        <p class="quote" data-i18n="about.quote">"Dentists shouldn't miss opportunities to care for patients because calls go unanswered, or spend hours buried in paperwork. We built Valixon to empower every clinic to deliver world-class care and give each patient the attention they deserve, without burning out the team."</p>
         <!-- TRISHA: replace "Dr. Kook" with the real full name and formal title -->
-        <div class="about-author" data-i18n="about.author">Dr. Kook</div>
+        <div class="about-author" data-i18n="about.author">Nitthakarn Detkhrut, DDS (Dr. Kook)</div>
         <div class="about-role" data-i18n="about.role">Co-Founder, Valixon</div>
       </div>
     </div>
@@ -638,6 +681,14 @@ const translations = {
     "nav.hr":"Valixon HR ↗",
     "nav.contact":"Contact",
     "nav.cta":"Get 45 Days Free",
+
+    "fam.kicker":"Also from Valixon",
+    "fam.title":"Clinic OS is one product. Valixon is a family.",
+    "fam.sub":"We're building the AI operating layer for every part of a dental clinic. Clinic OS runs the front of the practice. Valixon HR runs your team.",
+    "fam.tag":"NEW · Live now",
+    "fam.hr.sub":"The AI HR Operating System",
+    "fam.hr.desc":"Monthly peer + CEO evaluations, weighted bonus reports, and team culture reviews. Includes an interactive Report Generator so you can decide bonuses in minutes.",
+    "fam.hr.cta":"Explore Valixon HR",
 
     "hero.badge":"✦ The AI operating system for dental clinics",
     "hero.title":"Run a smarter dental practice, in <span class='hl'>half the time</span>.",
@@ -729,8 +780,8 @@ const translations = {
     "form.success.text":"Thank you. Our team will review your responses and reach out within one business day to schedule a short call and confirm your 45-day free trial.",
 
     "about.kicker":"Built with dentists, for dentists",
-    "about.quote":"\"Dentists shouldn't lose patients to a missed call, or hours to a spreadsheet. We built Valixon so every clinic can deliver world-class care, without burning out the team.\"",
-    "about.author":"Dr. Kook",
+    "about.quote":"\"Dentists shouldn't miss opportunities to care for patients because calls go unanswered, or spend hours buried in paperwork. We built Valixon to empower every clinic to deliver world-class care and give each patient the attention they deserve, without burning out the team.\"",
+    "about.author":"Nitthakarn Detkhrut, DDS (Dr. Kook)",
     "about.role":"Co-Founder, Valixon",
 
     "footer.about":"The AI operating system for dental clinics. Built bilingual for Thailand and beyond.",
@@ -749,14 +800,22 @@ const translations = {
     "nav.contact":"ติดต่อเรา",
     "nav.cta":"รับฟรี 45 วัน",
 
+    "fam.kicker":"อีกผลิตภัณฑ์จาก Valixon",
+    "fam.title":"Clinic OS เป็นหนึ่งผลิตภัณฑ์ Valixon เป็นครอบครัวผลิตภัณฑ์",
+    "fam.sub":"เรากำลังสร้างชั้นระบบปฏิบัติการ AI สำหรับทุกส่วนของคลินิกทันตกรรม Clinic OS ดูแลด้านหน้าคลินิก Valixon HR ดูแลทีมของคุณ",
+    "fam.tag":"ใหม่ · พร้อมใช้งาน",
+    "fam.hr.sub":"ระบบปฏิบัติการ HR ด้วย AI",
+    "fam.hr.desc":"ประเมินเพื่อนร่วมงาน + CEO รายเดือน รายงานโบนัสถ่วงน้ำหนัก และทบทวนวัฒนธรรมทีม รวมเครื่องมือสร้างรายงานที่ใช้งานได้ทันที ตัดสินใจโบนัสได้ในไม่กี่นาที",
+    "fam.hr.cta":"สำรวจ Valixon HR",
+
     "hero.badge":"✦ ระบบปฏิบัติการ AI สำหรับคลินิกทันตกรรม",
-    "hero.title":"บริหารคลินิกทันตกรรมให้ฉลาดขึ้น ใน<span class='hl'>ครึ่งเวลา</span>",
+    "hero.title":"บริหารคลินิกทันตกรรมให้มีประสิทธิภาพมากขึ้น โดยใช้เวลา<span class='hl'>ครึ่งเดียว</span>",
     "hero.sub":"Valixon จัดการสต็อกให้คุณ พาคนไข้ที่หายไปกลับมา บอกคุณว่าต้องโฟกัสอะไรในแต่ละสัปดาห์ และดูแลให้คลินิกพร้อมรับการตรวจสอบเสมอ ทั้งหมดในที่เดียว ทั้งภาษาไทยและอังกฤษ",
     "hero.cta":"รับการประเมินคลินิกฟรี",
     "hero.cta2":"ดูว่ามีอะไรบ้าง",
     "hero.note":"ฟรี 45 วัน · ไม่ต้องใช้บัตรเครดิต · รองรับทั้งไทยและอังกฤษ",
 
-    "db.title":"สรุปเช้าวันจันทร์",
+    "db.title":"สรุปผลงานประจำสัปดาห์",
     "db.date":"สร้างอัตโนมัติ · 9:00 น. ทุกวันจันทร์",
     "db.i1a":"ติดต่อคนไข้ 25 คนที่ถึงกำหนดขูดหินปูน",
     "db.i1b":"คาดว่าจะได้รายได้กลับมา ฿37,500",
@@ -764,11 +823,11 @@ const translations = {
     "db.i2b":"สต็อกยังมีใช้ได้อีก 14 สัปดาห์",
     "db.i3a":"เช็คลิสต์คุณภาพเกินกำหนด 3 รายการที่สาขา 2",
     "db.i3b":"มอบหมายให้หัวหน้าผู้ช่วย",
-    "db.badge":"วันฟรี",
+    "db.badge":"ทดลองใช้ฟรี",
 
-    "mods.kicker":"Product v1 · ระบบทำกำไรและควบคุมคลินิกทันตกรรม",
-    "mods.title":"4 โมดูล AI คลินิกทันตกรรมเดียวที่ดำเนินงานอย่างราบรื่น",
-    "mods.sub":"Valixon ครอบคลุม 4 ด้านที่คลินิกเสียเวลาและเงินมากที่สุด แต่ละโมดูลทำงานได้ด้วยตัวเอง และยิ่งเก่งขึ้นเมื่อใช้ร่วมกัน",
+    "mods.kicker":"ระบบทำกำไรและจัดการคลินิก",
+    "mods.title":"4 โมดูล AI ที่ใช้งานง่าย ทำงานได้จริง รวมไว้ในที่เดียว",
+    "mods.sub":"Valixon ออกแบบให้ครอบคลุมปัญหา 4 ด้านที่ทำให้คลินิก\"เสียเวลา\"และ\"เสียเงิน\"มากที่สุด โดยแต่ละโมดูลทำงานได้ด้วยตัวเอง และยิ่งมีประสิทธิภาพขึ้นเมื่อใช้ร่วมกัน",
     "mods.tag1":"โมดูล 1",
     "mods.tag2":"โมดูล 2",
     "mods.tag3":"โมดูล 3",
@@ -776,32 +835,32 @@ const translations = {
 
     "f1.title":"Inventory Agent · จัดการสต็อก",
     "f1.text":"ของไม่ขาด ของไม่หมดอายุ Valixon ติดตามทุกสินค้า พยากรณ์เวลาสั่งซื้อ และคว้าโปรโมชั่นที่ดีที่สุดจากซัพพลายเออร์ให้คุณ",
-    "f2.title":"Recall Agent · เรียกคนไข้กลับ",
+    "f2.title":"Recall Agent · ติดตามนัด Recall",
     "f2.text":"ติดตามคนไข้อัตโนมัติ ทั้งนัดขูดหินปูน การรักษาที่ยังไม่จบ และคนไข้ที่หายไป คนไข้ไม่มาตามนัดน้อยลง รายได้ที่ควรได้ก็กลับคืน",
-    "f3.title":"Owner Dashboard · แผนของเจ้าของ",
-    "f3.text":"ทุกวันจันทร์ Valixon บอกคุณ 5 อันดับสิ่งที่จะสร้างรายได้จริงในสัปดาห์นี้ ไม่ต้องใช้สเปรดชีท ไม่ต้องเดา แค่ทำตามที่ระบบบอก",
-    "f4.title":"Quality & Compliance · คุณภาพและการรับรอง",
-    "f4.text":"บันทึกการฆ่าเชื้อ ใบยินยอม รายงานอุบัติเหตุ และประวัติการอบรม เป็นระเบียบ อัพเดต และพร้อมสำหรับการตรวจสอบทุกวัน",
+    "f3.title":"Owner Dashboard · แดชบอร์ดสำหรับเจ้าของ",
+    "f3.text":"ทุกวันจันทร์ Valixon จะบอก 5 อันดับสิ่งที่จะสร้างรายได้จริงในสัปดาห์นี้ โดยไม่ต้องอ่านตารางรายงานทีละแผ่น ไม่ต้องดาดเดาเอง เพียงทำตามที่ระบบแนะนำ",
+    "f4.title":"Quality & Compliance · คุณภาพงานและการปฏิบัติตามมาตรฐาน",
+    "f4.text":"จัดระเบียบเอกสารต่างๆ เช่น บันทึกการฆ่าเชื้อ ใบยินยอม รายงานอุบัติเหตุ และประวัติการอบรม อีกทั้งยังคอยอัพเดต และพร้อมสำหรับการตรวจสอบทุกวัน",
 
     "steps.kicker":"วิธีการทำงาน",
     "steps.title":"เริ่มใช้งานได้ใน 3 ขั้นตอน",
-    "steps.sub":"ทีมของคุณไม่ต้องเรียนรู้ซอฟต์แวร์ใหม่ Valixon เข้ากับวิธีการทำงานของคลินิกคุณที่มีอยู่แล้ว",
-    "s1.title":"ประเมินคลินิกฟรี",
+    "steps.sub":"ทีมของคุณไม่ต้องเรียนรู้ซอฟต์แวร์ใหม่ เพราะ Valixon เข้ากับวิธีการทำงานของคลินิกคุณที่มีอยู่แล้ว",
+    "s1.title":"วิเคราะห์และรับผลประเมิน ฟรี",
     "s1.text":"คุณแบ่งปันข้อมูลคลินิกของคุณสั้นๆ เราจะช่วยหาว่าคลินิกกำลังเสียเวลาและเงินตรงไหน",
-    "s2.title":"ตั้งค่าและใช้งาน 45 วัน",
+    "s2.title":"แนะนำแนวทางการจัดระบบ 45 วัน",
     "s2.text":"ทีมงานของเราตั้งค่า Valixon สำหรับคลินิกคุณ อบรมทีมของคุณ และวางเกณฑ์ที่ชัดเจนสำหรับวัดผล",
     "s3.title":"เห็นผลจริงใน 90 วัน",
-    "s3.text":"รายได้ที่กลับคืน ของเสียที่ลดลง และแผนงานรายสัปดาห์ที่ชัดเจนสำหรับเจ้าของ แล้วค่อยตัดสินใจว่าจะไปต่อหรือไม่",
+    "s3.text":"รายจ่ายที่ไม่ควรเสียได้กลับคืน ความเสียหายที่จะลดลง และแผนงานรายสัปดาห์ที่ชัดเจนสำหรับเจ้าของ หากเห็นความเปลี่ยนแปลงแล้วค่อยตัดสินใจว่าจะไปต่อกับทีมเราไหม",
 
-    "offer.badge":"★ โครงการพันธมิตรผู้ก่อตั้ง",
+    "offer.badge":"★ โครงการนำร่องสำหรับพันธมิตรผู้ก่อตั้ง",
     "offer.title":"ทดลองใช้ Valixon ฟรี <span class='hl'>45 วัน</span>",
-    "offer.sub":"เรากำลังคัดเลือกคลินิกทันตกรรมกลุ่มเล็กๆ เพื่อร่วมเป็นพันธมิตรผู้ก่อตั้ง กรอกแบบประเมินคลินิกฟรี ถ้าคลินิกคุณเหมาะสม เราจะตั้งค่าระบบเต็มรูปแบบทั้ง 4 โมดูลให้คุณฟรี 45 วัน",
+    "offer.sub":"เรากำลังคัดเลือกคลินิกทันตกรรมกลุ่มเล็กๆ เพื่อร่วมเป็นพันธมิตรผู้ก่อตั้ง กรอกแบบประเมินคลินิกฟรี ถ้าปัญหาของคลินิกคุณเหมาะที่จะให้เราแก้ให้ เราจะตั้งค่าระบบเต็มรูปแบบทั้ง 4 โมดูลให้คุณฟรี 45 วัน",
     "offer.perk1":"ใช้งานได้ครบทั้ง 4 โมดูล",
     "offer.perk2":"ช่วยตั้งค่าและดูแลรายสัปดาห์แบบส่วนตัว",
-    "offer.perk3":"รายงานผลตอบแทนชัดเจนในวันที่ 90",
+    "offer.perk3":"รายงานความคุ้มค่าจากการลงทุน(ROI)ที่ชัดเจนในวันที่90",
     "offer.perk4":"ไม่ต้องใช้บัตรเครดิต",
 
-    "form.title":"ประเมินคลินิกฟรี",
+    "form.title":"วิเคราะห์และรับผลประเมิน ฟรี",
     "form.subtitle":"ใช้เวลาแค่ 3 นาที เราจะตอบกลับภายใน 1 วันทำการพร้อมการประเมินและขั้นตอนถัดไปที่ปรับให้เหมาะกับคลินิกคุณ",
     "form.s1":"1. เกี่ยวกับคลินิกของคุณ",
     "form.clinicName":"ชื่อคลินิก",
@@ -819,7 +878,7 @@ const translations = {
     "form.ch2":"คนไข้ไม่มาตามนัดหรือยกเลิกกะทันหัน",
     "form.ch3":"สต็อกเสียหาย ของขาด หรือหมดอายุ",
     "form.ch4":"ยากที่จะเห็นว่าการรักษาไหนทำเงินได้จริง",
-    "form.ch5":"หาและรักษาผู้ช่วยทันตแพทย์ได้ยาก",
+    "form.ch5":"หาและรักษาผู้ช่วยทันตแพทย์ไว้ในคลินิกได้ยาก",
     "form.ch6":"เครียดกับการรับรองมาตรฐานและเอกสารคุณภาพ",
     "form.ch7":"หลายสาขาประสานงานกันยาก",
     "form.s3":"3. เครื่องมือที่คุณใช้อยู่ตอนนี้",
@@ -834,13 +893,13 @@ const translations = {
     "form.email":"อีเมล",
     "form.phone":"เบอร์โทรศัพท์ (พร้อมรหัสประเทศ)",
     "form.submit":"ส่งการประเมินคลินิกของฉัน",
-    "form.privacy":"ข้อมูลของคุณจะถูกใช้เพื่อเตรียมการประเมินและการทดลองใช้ฟรีเท่านั้น ไม่มีสแปมแน่นอน",
+    "form.privacy":"ข้อมูลของคุณจะถูกใช้เพื่อเตรียมการประเมินและการทดลองใช้ฟรีเท่านั้น ไม่มีการขายข้อมูลและติดต่อส่งข้อความรบกวนแน่นอน",
     "form.success.title":"ได้รับแบบประเมินแล้ว",
     "form.success.text":"ขอบคุณค่ะ ทีมงานจะตรวจสอบคำตอบของคุณและติดต่อกลับภายใน 1 วันทำการ เพื่อนัดคุยสั้นๆ และยืนยันการทดลองใช้ฟรี 45 วัน",
 
     "about.kicker":"สร้างโดยทันตแพทย์ เพื่อทันตแพทย์",
-    "about.quote":"\"ทันตแพทย์ไม่ควรเสียคนไข้เพราะสายที่รับไม่ทัน หรือเสียเวลาเป็นชั่วโมงไปกับสเปรดชีท เราสร้าง Valixon ขึ้นมาเพื่อให้ทุกคลินิกมอบการดูแลระดับโลกได้ โดยไม่ทำให้ทีมงานเหนื่อยล้า\"",
-    "about.author":"ดร. กุ๊ก",
+    "about.quote":"\"ทันตแพทย์ไม่ควรเสียโอกาสในการดูแลคนไข้เพราะสายที่รับไม่ทัน หรือเสียเวลาเป็นชั่วโมงไปกับเอกสาร เราสร้าง Valixon ขึ้นมาเพื่อให้ทุกคลินิกมอบการดูแลระดับ world class และใส่ใจดูแลคนไข้ได้เต็มที่ โดยไม่ทำให้ทีมงานเหนื่อยล้า\"",
+    "about.author":"ทพญ.นิษฐกานต์ เดชครุธ (หมอกุ๊ก)",
     "about.role":"ผู้ร่วมก่อตั้ง Valixon",
 
     "footer.about":"ระบบปฏิบัติการ AI สำหรับคลินิกทันตกรรม ออกแบบให้รองรับทั้งไทยและทั่วโลก",
