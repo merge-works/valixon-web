@@ -531,31 +531,31 @@
           <div class="form-row">
             <div class="field">
               <label data-i18n="form.clinicName">Clinic name</label>
-              <input type="text" required data-i18n-ph="form.clinicName.ph" placeholder="Bright Smile Dental" />
+              <input name="clinicName" type="text" required data-i18n-ph="form.clinicName.ph" placeholder="Bright Smile Dental" />
             </div>
             <div class="field">
               <label data-i18n="form.location">City / Country</label>
-              <input type="text" required data-i18n-ph="form.location.ph" placeholder="Bangkok, Thailand" />
+              <input name="location" type="text" required data-i18n-ph="form.location.ph" placeholder="Bangkok, Thailand" />
             </div>
           </div>
           <div class="form-row">
             <div class="field">
               <label data-i18n="form.branches">Number of branches</label>
-              <input type="number" min="1" required placeholder="1" />
+              <input name="branches" type="number" min="1" required placeholder="1" />
             </div>
             <div class="field">
               <label data-i18n="form.dentists">Number of dentists</label>
-              <input type="number" min="1" required placeholder="3" />
+              <input name="dentists" type="number" min="1" required placeholder="3" />
             </div>
           </div>
           <div class="form-row">
             <div class="field">
               <label data-i18n="form.owner">Owner name</label>
-              <input type="text" required data-i18n-ph="form.owner.ph" placeholder="Dr. Kanya Rojanapradit" />
+              <input name="owner" type="text" required data-i18n-ph="form.owner.ph" placeholder="Dr. Kanya Rojanapradit" />
             </div>
             <div class="field">
               <label data-i18n="form.role">Your role</label>
-              <input type="text" data-i18n-ph="form.role.ph" placeholder="Owner, Manager, Dentist..." />
+              <input name="role" type="text" data-i18n-ph="form.role.ph" placeholder="Owner, Manager, Dentist..." />
             </div>
           </div>
         </div>
@@ -577,7 +577,7 @@
           <div class="section-label" data-i18n="form.s3">3. Your current tools</div>
           <div class="field">
             <label data-i18n="form.software">Which clinic management software do you use? (Optional)</label>
-            <input type="text" data-i18n-ph="form.software.ph" placeholder="DentCloud, FD, spreadsheets, LINE..." />
+            <input name="software" type="text" data-i18n-ph="form.software.ph" placeholder="DentCloud, FD, spreadsheets, LINE..." />
           </div>
           <div class="field">
             <label data-i18n="form.useLine">Do you communicate with patients via LINE?</label>
@@ -593,16 +593,16 @@
           <div class="form-row">
             <div class="field">
               <label data-i18n="form.name">Your name</label>
-              <input type="text" required data-i18n-ph="form.name.ph" placeholder="Dr. Jane Smith" />
+              <input name="fullName" type="text" required data-i18n-ph="form.name.ph" placeholder="Dr. Jane Smith" />
             </div>
             <div class="field">
               <label data-i18n="form.email">Email</label>
-              <input type="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" lang="en" required placeholder="you@practice.com" />
+              <input name="email" type="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" lang="en" required placeholder="you@practice.com" />
             </div>
           </div>
           <div class="field">
             <label data-i18n="form.phone">Phone (include country code)</label>
-            <input type="tel" required placeholder="+66 8x xxx xxxx" />
+            <input name="phone" type="tel" required placeholder="+66 8x xxx xxxx" />
           </div>
         </div>
 
@@ -941,9 +941,29 @@ document.querySelectorAll('.lang-btn').forEach(function(b){
   b.addEventListener('click', function(){ setLang(b.dataset.lang); });
 });
 
+// TRISHA: paste your Apps Script Web app URL between the quotes below to activate
+// lead capture. See valixon/products/apps-script/README.md for setup steps.
+const LEADS_ENDPOINT = '';
+
 function submitForm(e){
   e.preventDefault();
-  document.getElementById('assessmentForm').style.display = 'none';
+  var form = document.getElementById('assessmentForm');
+  var payload = { source: 'clinicos', lang: document.documentElement.lang || 'en' };
+  var fd = new FormData(form);
+  fd.forEach(function(v, k){
+    if(k === 'ch'){
+      if(!payload.challenges) payload.challenges = [];
+      payload.challenges.push(v);
+    } else {
+      payload[k] = v;
+    }
+  });
+  if (LEADS_ENDPOINT) {
+    try {
+      fetch(LEADS_ENDPOINT, {method:'POST', mode:'no-cors', body: JSON.stringify(payload)}).catch(function(){});
+    } catch(err) {}
+  }
+  form.style.display = 'none';
   document.getElementById('formSuccess').style.display = 'block';
   document.getElementById('offer').scrollIntoView({behavior:'smooth'});
   return false;
