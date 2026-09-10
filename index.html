@@ -90,6 +90,9 @@
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
   .hero-note{margin-top:18px;font-size:13.5px;color:#8FA4B8;display:flex;align-items:center;gap:8px;}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block;}
+  .hero-trust{display:inline-flex;align-items:center;gap:9px;margin-top:14px;padding:8px 15px 8px 8px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:99px;font-size:13px;color:#E8F0F9;font-weight:600;}
+  .hero-trust-ic{width:22px;height:22px;border-radius:50%;background:var(--teal);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .hero-trust-ic svg{width:12px;height:12px;}
 
   /* DASHBOARD MOCK */
   .dashboard-card{
@@ -334,6 +337,10 @@
         <a href="#modules" class="btn btn-light" data-i18n="hero.cta2">See what's inside</a>
       </div>
       <p class="hero-note"><span class="dot"></span><span data-i18n="hero.note">45 days free · No credit card · Bilingual TH and EN</span></p>
+      <div class="hero-trust">
+        <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span data-i18n="hero.trust">Designed with Dr. Nitthakarn Detkhrut, DDS · Practicing dentist</span>
+      </div>
     </div>
 
     <!-- Owner Action Dashboard mock, showing the flagship module -->
@@ -589,7 +596,7 @@
             </div>
             <div class="field">
               <label data-i18n="form.email">Email</label>
-              <input type="email" required placeholder="you@practice.com" />
+              <input type="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" lang="en" required placeholder="you@practice.com" />
             </div>
           </div>
           <div class="field">
@@ -666,7 +673,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span data-i18n="footer.rights">© 2026 Valixon. All rights reserved.</span>
+      <span data-i18n="footer.rights">© 2026 Valixon Co., Ltd. · บริษัท วาลิกซอน จำกัด · All rights reserved.</span>
       <span data-i18n="footer.made">คืนหมอให้คนไข้ · Return dentists to their patients.</span>
     </div>
   </div>
@@ -696,6 +703,7 @@ const translations = {
     "hero.cta":"Get your free Clinic Assessment",
     "hero.cta2":"See what's inside",
     "hero.note":"45 days free · No credit card · Bilingual TH and EN",
+    "hero.trust":"Designed with Dr. Nitthakarn Detkhrut, DDS · Practicing dentist",
 
     "db.title":"Your Monday Brief",
     "db.date":"Auto-generated · 9:00 AM every Monday",
@@ -789,7 +797,7 @@ const translations = {
     "footer.about.link":"About",
     "footer.contactTitle":"Get in touch",
     "footer.line":"LINE: @valixon",
-    "footer.rights":"© 2026 Valixon. All rights reserved.",
+    "footer.rights":"© 2026 Valixon Co., Ltd. · บริษัท วาลิกซอน จำกัด · All rights reserved.",
     "footer.made":"คืนหมอให้คนไข้ · Return dentists to their patients."
   },
   th: {
@@ -814,6 +822,7 @@ const translations = {
     "hero.cta":"รับการประเมินคลินิกฟรี",
     "hero.cta2":"ดูว่ามีอะไรบ้าง",
     "hero.note":"ฟรี 45 วัน · ไม่ต้องใช้บัตรเครดิต · รองรับทั้งไทยและอังกฤษ",
+    "hero.trust":"ออกแบบร่วมกับ ทพญ.นิษฐกานต์ เดชครุธ · ทันตแพทย์ผู้ปฏิบัติงานจริง",
 
     "db.title":"สรุปผลงานประจำสัปดาห์",
     "db.date":"สร้างอัตโนมัติ · 9:00 น. ทุกวันจันทร์",
@@ -907,7 +916,7 @@ const translations = {
     "footer.about.link":"เกี่ยวกับเรา",
     "footer.contactTitle":"ติดต่อเรา",
     "footer.line":"LINE: @valixon",
-    "footer.rights":"© 2026 Valixon สงวนลิขสิทธิ์",
+    "footer.rights":"© 2026 บริษัท วาลิกซอน จำกัด · Valixon Co., Ltd. สงวนลิขสิทธิ์",
     "footer.made":"คืนหมอให้คนไข้ · Return dentists to their patients."
   }
 };
